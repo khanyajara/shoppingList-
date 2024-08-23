@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from "../action";
+import { ADD_ITEM, REMOVE_ITEM } from "./action";
 //import { initialState } from "./reducer";
 
 const initialState = {

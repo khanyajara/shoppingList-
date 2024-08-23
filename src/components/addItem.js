@@ -1,15 +1,15 @@
-import React, {useState} from "react";
-import { useDispatch} from 'react-redux';
-import { addItem, ADD_ITEM } from "../action";
-import { useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
+import { addItem } from "../redux/action"; // Ensure addItem is imported from the correct path
+import { useSelector } from "react-redux"; // useSelector is not used in this component, consider removing if unnecessary
 
-const AddItem = ()=>{
-    const [item,setItem]=useState('');
+const AddItem = () => {
+    const [item, setItem] = useState('');
     const dispatch = useDispatch();
 
-    const submitItem = (e)=>{
+    const submitItem = (e) => {
         e.preventDefault();
-        if (item){
+        if (item.trim()) { // trim to avoid adding items with only spaces
             dispatch(addItem(item));
             setItem('');
         }
@@ -17,10 +17,15 @@ const AddItem = ()=>{
 
     return (
         <form onSubmit={submitItem}>
-            <input type="text" value={item} onChange={(e)=>setItem(e.target.value)}
-            placeholder="Add a new item "/>
+            <input
+                type="text"
+                value={item}
+                onChange={(e) => setItem(e.target.value)}
+                placeholder="Add a new item"
+            />
             <button type="submit">Add</button>
         </form>
     );
 };
+
 export default AddItem;

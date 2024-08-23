@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItem } from "../action";
+import { removeItem } from "../redux/action";
 
 
 const ShoppingList =()=>{
