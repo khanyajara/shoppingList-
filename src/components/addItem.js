@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from 'react-redux';
-import { addItem } from "../redux/action"; // Ensure addItem is imported from the correct path
-import { useSelector } from "react-redux"; // useSelector is not used in this component, consider removing if unnecessary
+import { addItem } from "../redux/action";
 
 const AddItem = () => {
     const [item, setItem] = useState('');
@@ -10,20 +9,21 @@ const AddItem = () => {
     const submitItem = (e) => {
         e.preventDefault();
         if (item.trim()) { // trim to avoid adding items with only spaces
-            dispatch(addItem(item));
+            dispatch(addItem({ id: Date.now(), name: item })); // Include a unique id
             setItem('');
         }
     };
 
     return (
-        <form onSubmit={submitItem}>
+        <form onSubmit={submitItem} className="add-todo">
             <input
                 type="text"
                 value={item}
                 onChange={(e) => setItem(e.target.value)}
                 placeholder="Add a new item"
+                className="add-todo__input"
             />
-            <button type="submit">Add</button>
+            <button type="submit" className="add-todo__btn">Add</button>
         </form>
     );
 };
