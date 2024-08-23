@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM } from "./action";
+import { ADD_ITEM, REMOVE_ITEM,UPDATE_ITEM } from "./action";
 //import { initialState } from "./reducer";
 
 const initialState = {
@@ -12,9 +12,14 @@ const shoppingListReducer = (state = initialState, action)=>
             return {...state, items: [...state.items, action.payload]};
         case REMOVE_ITEM:
             return {...state, items: state.items.filter(item => item.id !== action.payload)};
+            case UPDATE_ITEM:
+                return {...state, items: state.items.map(item => item.id === action.payload.id ? action
+                    .payload : item)};
+
             default:
                 return state;
 
+
     }
-}
+}  
 export default shoppingListReducer;
