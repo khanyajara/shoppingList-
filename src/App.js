@@ -11,8 +11,8 @@ const App=()=>{
       <div className="todo-app">
         <h1 className="todo-title">Shopping List</h1>
         <AddItem/>
-        <ShoppingList/>
       </div>
+        <div className="lists"><ShoppingList/></div>
     </div>
   );
 };

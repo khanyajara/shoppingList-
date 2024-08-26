@@ -7,17 +7,18 @@ const ShoppingList = () => {
     const items = useSelector((state) => state.items);
 
     return (
-        <ul className="todo-list">
-            {items.map((item) => (
-                <li key={item.id} className="todo">
-                    {item.name}<br/>
-                    <button onClick={() => dispatch(removeItem(item.id))}>Remove</button>
-                    <button onClick={() => dispatch(updateItem(item.id))}>UPDATE</button>
-                    <button className="btns" onClick={() => dispatch(boughtItem(item.id))}>BOUGHT</button>
-                </li>
-
-            ))}
-        </ul>
+        <div className="list-container">
+            <ul className="todo-list">
+                {items.map((item) => (
+                    <li key={item.id} className="todo">
+                        {item.name} - Quantity:{item.quantity} <br/>
+                        <button className="btns" onClick={() => dispatch(removeItem(item.id))}>Remove</button>
+                        <button className="btns" onClick={() => dispatch(updateItem(item.id))}>Update</button>
+                        <button className="btns" onClick={() => dispatch(boughtItem(item.id))}>Bought</button>
+                    </li>
+                ))}
+            </ul>
+        </div>
     );
 };
 
