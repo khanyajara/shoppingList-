@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { removeItem, updateItem } from "../redux/action";
+import { removeItem, updateItem, boughtItem } from "../redux/action";
 
 const ShoppingList = () => {
     const dispatch = useDispatch();
@@ -13,6 +13,7 @@ const ShoppingList = () => {
                     {item.name}<br/>
                     <button onClick={() => dispatch(removeItem(item.id))}>Remove</button>
                     <button onClick={() => dispatch(updateItem(item.id))}>UPDATE</button>
+                    <button className="btns" onClick={() => dispatch(boughtItem(item.id))}>BOUGHT</button>
                 </li>
 
             ))}

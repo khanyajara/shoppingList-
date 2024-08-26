@@ -8,8 +8,8 @@ const AddItem = () => {
 
     const submitItem = (e) => {
         e.preventDefault();
-        if (item.trim()) { // trim to avoid adding items with only spaces
-            dispatch(addItem({ id: Date.now(), name: item })); // Include a unique id
+        if (item.trim()) {
+            dispatch(addItem({ id: Date.now(), name: item })); 
             setItem('');
         }
     };

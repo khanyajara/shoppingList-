@@ -4,6 +4,8 @@ export const REMOVE_ITEM =
 'REMOVE-ITEM';
 export const UPDATE_ITEM =
 'UPDATE-ITEM';
+export const BOUGHT_ITEM =
+'BOUGHT-ITEM';
 
 export const addItem= (item)=>
 ({
@@ -20,6 +22,11 @@ export const updateItem = (index, item)=>
     type: UPDATE_ITEM,
     payload: {index, item}
     
+})
+export const boughtItem = (index)=>
+({
+    type: BOUGHT_ITEM,
+    payload: index
 })
 
 
