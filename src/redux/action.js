@@ -1,3 +1,5 @@
+import { type } from "@testing-library/user-event/dist/type";
+
 export const ADD_ITEM = 
 'ADD-ITEM';
 export const REMOVE_ITEM =
@@ -54,11 +56,21 @@ export const shopName =(shop)=>
     type: SHOP_NAME,
     payload: shop
 })
-export const registerUser =()=>
-({
-    type: REGISTER_USER
-    
-})
+export const registerUser =(userData)=>{
+    return(dispatch)=>{
+        localStorage.setItem('user',
+        JSON.stringify(userData));
+        dispatch({
+            type:'REGISTER_SUCCESS',
+            payload:userData,
+        })
+        
+    }
+}
+
+
+
+
 
 
 

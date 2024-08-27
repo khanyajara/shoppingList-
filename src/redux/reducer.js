@@ -1,8 +1,9 @@
-import { ADD_ITEM, REMOVE_ITEM,UPDATE_ITEM,BOUGHT_ITEM,ITEM_CATEGORY,SHOP_NAME } from "./action";
+import { ADD_ITEM, REMOVE_ITEM,UPDATE_ITEM,BOUGHT_ITEM,ITEM_CATEGORY,SHOP_NAME,REGISTER_USER,USER_LOGIN } from "./action";
 //import { initialState } from "./reducer";
 
 const initialState = {
     items:[],
+    user:null,
 };
 
 const shoppingListReducer = (state = initialState, action)=>
@@ -27,7 +28,10 @@ const shoppingListReducer = (state = initialState, action)=>
                 }
                 case SHOP_NAME:
                     return {...state, shopName: action.payload};
-                    
+                    case REGISTER_USER:
+                        return {...state, user: action.payload};
+        case REGISTER_SUCCESS:
+            return {...state, user: action.payload};
 
             default:
                 return state;
