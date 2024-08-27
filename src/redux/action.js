@@ -61,12 +61,32 @@ export const registerUser =(userData)=>{
         localStorage.setItem('user',
         JSON.stringify(userData));
         dispatch({
-            type:'REGISTER_SUCCESS',
+            type:'REGISTER_USER',
             payload:userData,
         })
         
     }
 }
+export const userlogin = (userData)=>{
+    return(dispatch)=>{
+        localStorage.setItem('user',
+        JSON.stringify(userData));
+        dispatch({
+            type:'USER_LOGIN',
+            payload:userData,
+        })
+}
+}
+export const LOGOUT_USER = 'LOGOUT-USER';
+
+export const logoutUser = () => {
+    return (dispatch) => {
+        localStorage.removeItem('user');
+        dispatch({
+            type: LOGOUT_USER,
+        });
+    };
+};
 
 
 

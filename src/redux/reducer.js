@@ -1,4 +1,4 @@
-import { ADD_ITEM, REMOVE_ITEM,UPDATE_ITEM,BOUGHT_ITEM,ITEM_CATEGORY,SHOP_NAME,REGISTER_USER,USER_LOGIN } from "./action";
+import { ADD_ITEM, REMOVE_ITEM,UPDATE_ITEM,BOUGHT_ITEM,ITEM_CATEGORY,SHOP_NAME,REGISTER_USER,USER_LOGIN,LOGOUT_USER } from "./action";
 //import { initialState } from "./reducer";
 
 const initialState = {
@@ -30,8 +30,19 @@ const shoppingListReducer = (state = initialState, action)=>
                     return {...state, shopName: action.payload};
                     case REGISTER_USER:
                         return {...state, user: action.payload};
-        case REGISTER_SUCCESS:
-            return {...state, user: action.payload};
+                        case REGISTER_USER:
+                            case USER_LOGIN:
+                                return {
+                                    ...state,
+                                    user: action.payload,
+                                    isAuthenticated: true,
+                                };
+                            case LOGOUT_USER:
+                                return {
+                                    ...state,
+                                    user: null,
+                                    isAuthenticated: false,
+                                };
 
             default:
                 return state;

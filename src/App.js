@@ -1,21 +1,47 @@
 import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddItem from "./components/addItem";
 import ShoppingList from "./components/shoppinglist";
 import CategoryItem from "./components/categoryitem";
-import Css from './App.css'
+import Registeruser from "./components/register";
+import Login from "./components/login";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "./redux/action"; // Updated path
+import { useNavigate } from "react-router-dom";
+import './App.css';
 
-const App=()=>{
-  
-  
+const Home = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+      dispatch(logoutUser());
+      navigate("/login");
+  };
+
   return (
-    <div className="root">
       <div className="todo-app">
-        <h1 className="todo-title">Shopping List</h1>
-        <AddItem/>
-        <CategoryItem/>
+          <h1 className="todo-title">Shopping List</h1>
+          <button onClick={handleLogout}>Logout</button>
+          <AddItem />
+          <CategoryItem />
+          <div className="lists"><ShoppingList /></div>
       </div>
-        <div className="lists"><ShoppingList/></div>
-    </div>
   );
 };
-export default App
+
+const App = () => {
+    return (
+        <Router>
+            <div className="root">
+                <Routes>
+                    <Route path="/" element={<Home />} />
+                    <Route path="/register" element={<Registeruser />} />
+                    <Route path="/login" element={<Login />} />
+                </Routes>
+            </div>
+        </Router>
+    );
+};
+
+export default App;
