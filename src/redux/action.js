@@ -12,6 +12,10 @@ export const ITEM_CATEGORY =
 'ITEM-CATEGORY';
 export const SHOP_NAME =
 'SHOP-NAME';
+export const REGISTER_USER =
+'REGISTER-USER';
+export const USER_LOGIN =
+'USER-LOGIN';
 
 export const addItem= (item)=>
 ({
@@ -50,5 +54,11 @@ export const shopName =(shop)=>
     type: SHOP_NAME,
     payload: shop
 })
+export const registerUser =()=>
+({
+    type: REGISTER_USER
+    
+})
+
 
 
