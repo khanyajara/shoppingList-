@@ -47,3 +47,13 @@ background-color: aqua;
   width: 450px;
   margin-left: -75px;
 }
+
+.newItem{
+  background-color: aliceblue;
+}
+.search{
+  background-color: aliceblue;
+}
+.search-input{
+  background-color: aliceblue;
+}

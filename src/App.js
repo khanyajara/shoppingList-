@@ -1,6 +1,7 @@
 import React from "react";
 import AddItem from "./components/addItem";
 import ShoppingList from "./components/shoppinglist";
+import CategoryItem from "./components/categoryitem";
 import Css from './App.css'
 
 const App=()=>{
@@ -11,6 +12,7 @@ const App=()=>{
       <div className="todo-app">
         <h1 className="todo-title">Shopping List</h1>
         <AddItem/>
+        <CategoryItem/>
       </div>
         <div className="lists"><ShoppingList/></div>
     </div>

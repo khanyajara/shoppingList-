@@ -38,10 +38,10 @@ export const boughtItem = (index)=>
     type: BOUGHT_ITEM,
     payload: index
 });
-export const itemCategory =(index,item)=>
+export const itemCategory =(item)=>
 ({
     type: ITEM_CATEGORY,
-    payload: {index, item}
+    payload:  item
 })
 
 

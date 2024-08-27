@@ -17,11 +17,9 @@ const shoppingListReducer = (state = initialState, action)=>
                     .payload : item)};
          case BOUGHT_ITEM:
             return {...state, items: state.items.map(item => item.id === action.payload.id ? {...item, bought: true} : item)};
-            
-
-         
-
-            default:
+        case ITEM_CATEGORY:
+            return {...state, items: state.items.filter(item => item.category === action.payload)};
+             default:
                 return state;
 
 
