@@ -6,15 +6,17 @@ const AddItem = () => {
     const [item, setItem] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [category,setCategory]=useState("")
+    const [shop,setShop]=useState("")
 
     const dispatch = useDispatch();
 
     const submitItem = (e) => {
         e.preventDefault();
         if (item.trim() && quantity > 0) {
-            const newItem = { id: Date.now(), name: item, quantity: quantity, category:category };
+            const newItem = { id: Date.now(), name: item,shop:shop, quantity: quantity, category:category };
             dispatch(addItem(newItem)); 
             setItem('');
+            setShop("")
             setQuantity(1);
             setCategory("")
         }
@@ -31,6 +33,13 @@ const AddItem = () => {
                     className="add-item__input"
                 />
                 <input
+                    type="text"
+                    value={shop}
+                    onChange={(e)=> setShop(e.target.value)}
+                    placeholder="Add a new name"
+                    className="add-item__input"
+                    /> <br/>
+                <input
                     type="number"
                     value={quantity}
                     onChange={(e) => setQuantity(e.target.valueAsNumber)}
@@ -39,23 +48,24 @@ const AddItem = () => {
                     className="add-item__input"
                 />
                 
-                <div className="add-item__select">
+               
 
                     <select id="category" name="category" value={category} onChange={(e) =>
-                    setCategory(e.target.value)}>
+                    setCategory(e.target.value)}  className="add-item__input">
                         <option value="0">Select a category</option>
-                        <option value="drink">Drink</option>
-                        <option value="Personal Care">Personal Care</option>
-                        <option value="snacks">Snacks</option>
-                        <option value="PanteryItems">Pantery Items</option>
-                        <option value="fashion and apparel">Fasion and Apparel</option>
-                        <option value="houseHold">Household</option>
-                        <option value="frozenFoods">frozen Foods</option>
-                        <option value="PetCare">Pet Care</option>
-                        <option value="Meat">Meat</option>
-                        <option value="veggies">Veggies</option>
+                        <option value="drink">drink</option>
+                        <option value="Personal Care">personal Care</option>
+                        <option value="snacks">snacks</option>
+                        <option value="PanteryItems">pantery Items</option>
+                        <option value="fashion and apparel">fasion and Apparel</option>
+                        <option value="houseHold">household</option>
+                        <option value="frozenFoods">frozen foods</option>
+                        <option value="PetCare">pet Care</option>
+                        <option value="Meat">meat</option>
+                        <option value="veggies">veggies</option>
                     </select>
-                </div>
+                    <br/>
+                
                 <button type="submit" className="add-item__btn">Add</button>
             </form>
         </div>

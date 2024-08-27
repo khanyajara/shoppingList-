@@ -29,8 +29,9 @@ const CategoryItem = () => {
             value={search}
             placeholder="search categories"
             onChange={(e)=>setSearch(e.target.value)}
+            className="add-item__input"
             />
-            <ul>
+            <ul  className="add-item__input">
                 {categoryList.map((item,index)=>(
                     <li key={index}>{item}</li>
                 ))}

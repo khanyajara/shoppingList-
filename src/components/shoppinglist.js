@@ -10,12 +10,17 @@ const ShoppingList = () => {
         <div className="list-container">
             <ul className="todo-list">
                 {items.map((item) => (
-                    <li key={item.id} className="todo">
-                        {item.name} - Quantity:{item.quantity} - Category:{item.category} <br/>
+                   <li
+                   key={item.id}
+                   className={`todo ${item.bought ? "bought" : ""}`}
+               >
+                       Item: {item.name} <br/> Shop: {item.shop} <br/>  Quantity:{item.quantity} <br/> Category:{item.category} <br/>
                        
                         <button className="btns" onClick={() => dispatch(removeItem(item.id))}>Remove</button>
                         <button className="btns" onClick={() => dispatch(updateItem(item.id))}>Update</button>
-                        <button className="btns" onClick={() => dispatch(boughtItem(item.id))}>Bought</button>
+                        <button className="btns" onClick={() => dispatch(boughtItem(item.id))}>
+                            {item.bought ? "Undo Bought" : "Bought"}
+                        </button>
                     </li>
                 ))}
             </ul>
