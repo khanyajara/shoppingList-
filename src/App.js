@@ -1,4 +1,4 @@
-import React, { useState, useEffect, navigate } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AddItem from "./components/addItem";
 import ShoppingList from "./components/shoppinglist";
@@ -16,7 +16,7 @@ const App = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const dispatch = useDispatch();
-  const navigate = useNavigate();  
+   
   
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem('loggedInUser'));
@@ -27,31 +27,22 @@ const App = () => {
     setLoading(false); 
   }, []);
   
-  const handleLogout = () => {
-    localStorage.removeItem('loggedInUser');
-    setLoggedInUser(null);
-    setIsAuthenticated(false);
-    dispatch(logoutUser()); 
-    navigate("/login");  
-  };
+ 
+    
+    
+  ;
 
   return (
     <Router>
-      <div className="todo-app">
-          <h1 className="todo-title">Shopping List</h1>
-          <button onClick={handleLogout}>Logout</button>
-          <AddItem />
-          <CategoryItem />
-          <div className="lists"><ShoppingList /></div>
-      </div>
       
-      <div className="root">
+      <CategoryItem/>
+           
           <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/register" element={<Registeruser />} />
               <Route path="/login" element={<Login />} />
           </Routes>
-      </div>
+      
     </Router>
   );
 };

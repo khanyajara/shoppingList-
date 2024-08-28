@@ -1,43 +1,54 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import Css  from './register.css'
+import React, { useState, navigate } from "react";
+import { Link,  } from 'react-router-dom';
 
-const Register = ({ onRegister }) => {
+import './login.css';
+
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  
 
-  const handleRegister = (e) => {
+  const login = (e) => {
     e.preventDefault();
 
     const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.username === username && user.password === password);
 
-    if (users.find(user => user.username === username)) {
-      alert('Username Exists');
+    if (user) {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      navigate('/home'); 
     } else {
-      const newUser = { username, password };
-      users.push(newUser);
-      localStorage.setItem('users', JSON.stringify(users));
-      alert('Registration Successful!');
-      onRegister();
+      alert('Invalid Username or Password');
     }
   };
 
   return (
     <div className="auth-container">
-      <h2>Register</h2>
-      <form className='space' onSubmit={handleRegister}>
-        <input className='form' type="text" placeholder="Username"
-          value={username} onChange={(e) => setUsername(e.target.value)}
-          required/><br/>
-        <input className='form' type="password" placeholder="Password"
-          value={password} onChange={(e) => setPassword(e.target.value)}
-          required/>
-        <button className='btn2' type="submit">Register</button>
+      <h2>Login</h2>
+      <form className='space' onSubmit={login}>
+        <input
+          className='form'
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        /><br/>
+        <input
+          className='form'
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button className='btn2' type="submit">Login</button>
       </form>
       <div className="link-container">
-        <p>Already registered? <Link to="/login">Login</Link></p>
+        <p>New User? <Link to="/register">Register here</Link></p>
       </div>
     </div>
   );
 };
-export default Register
+
+export default Login;

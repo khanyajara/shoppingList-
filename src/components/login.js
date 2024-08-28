@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState, navigate } from "react";
+import { Link } from 'react-router-dom';
 
 import './login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); // React Router's useNavigate hook to programmatically navigate
+  
 
   const login = (e) => {
     e.preventDefault();

@@ -18,6 +18,8 @@ export const REGISTER_USER =
 'REGISTER-USER';
 export const USER_LOGIN =
 'USER-LOGIN';
+export const LOGOUT_USER = 
+'LOGOUT-USER';
 
 export const addItem= (item)=>
 ({
@@ -77,17 +79,16 @@ export const userlogin = (userData)=>{
         })
 }
 }
-export const LOGOUT_USER = 'LOGOUT-USER';
 
-export const logoutUser = () => {
-    return (dispatch) => {
+
+export const logout =()=>{
+    return(dispatch)=>{
         localStorage.removeItem('user');
         dispatch({
-            type: LOGOUT_USER,
-        });
-    };
-};
-
+            type: 'LOGOUT',
+            })
+            }
+}
 
 
 
