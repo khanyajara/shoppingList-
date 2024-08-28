@@ -1,80 +1,43 @@
-import React, {useState, useEffect} from "react";
-import { json, Link } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { registerUser } from "../redux/action";
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import Css  from './register.css'
 
-const Registeruser = ()=> {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState(" ")
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [error, setError] = useState("");
-    const dispatch = useDispatch();
-    const { loading, error: err } = useSelector((state) => state.registerUser)
-   
-    const SubmitInfo = (e) => {
-        e.preventDefault();
-        if (password !== confirmPassword) {
-            setError("Passwords do not match");
-            return;
-        }
-        dispatch(registerUser({ username, email, password }));
+const Register = ({ onRegister }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+
+    if (users.find(user => user.username === username)) {
+      alert('Username Exists');
+    } else {
+      const newUser = { username, password };
+      users.push(newUser);
+      localStorage.setItem('users', JSON.stringify(users));
+      alert('Registration Successful!');
+      onRegister();
     }
-       
-    const users = json.parse(localStorage.getItem('users')) || [];
+  };
 
-    if (users.find(user=> user.username === username)) {
-        alert("Username Exists");
-    }else {
-        localStorage.setItem('users', JSON.stringify([...users, {username, email, password}]));
-
-    }
-
-    return (
-        <div>
-            <form onSubmit={SubmitInfo}>
-                <label>Username:</label>
-                <input
-                type="text"
-                value={username}
-                onChange={(e)=> setUsername(e.target.value)}
-                placeholder="Username...."
-                required
-                />
-                <br/>
-                <label>Email:</label>
-                <input
-                type="email"
-                value={email}
-                onChange={(e)=> setEmail(e.target.value)}
-                placeholder="Email...."
-                required/>
-                 <br/>
-                 <label>Password:</label>
-                 <input
-                 type="password"
-                 value={password}
-                 onChange={(e)=> setPassword(e.target.value)}
-                 placeholder="Password...."
-                 required/>
-                 <br/>
-                 <label>Confirm Password:</label>
-                 <input
-                 type="password"
-                 value={confirmPassword}
-                 onChange={(e)=> setConfirmPassword(e.target.value)}
-                 placeholder="Confirm Password...."
-                 required/>
-                 <br/>
-                 <button type="submit">REGISTER</button>
-            </form>
-            <div className="link-container">
-                <p>Already have an account? <Link to="/login">Login</Link></p>
-            </div>
-        </div>
-    )
-
-
-      
+  return (
+    <div className="auth-container">
+      <h2>Register</h2>
+      <form className='space' onSubmit={handleRegister}>
+        <input className='form' type="text" placeholder="Username"
+          value={username} onChange={(e) => setUsername(e.target.value)}
+          required/><br/>
+        <input className='form' type="password" placeholder="Password"
+          value={password} onChange={(e) => setPassword(e.target.value)}
+          required/>
+        <button className='btn2' type="submit">Register</button>
+      </form>
+      <div className="link-container">
+        <p>Already registered? <Link to="/login">Login</Link></p>
+      </div>
+    </div>
+  );
 };
-export default Registeruser;
+export default Register

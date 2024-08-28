@@ -1,66 +1,54 @@
 import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { userlogin } from "../redux/action";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from 'react-router-dom';
+
+import './login.css';
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const dispatch = useDispatch();
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-    const [loading, setLoading] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); // React Router's useNavigate hook to programmatically navigate
 
-    const loggingin = (e) => {
-        e.preventDefault();
-        setLoading(true);
-        dispatch(userlogin({ email, password }))
-            .then((res) => {
-                if (res.data.success) {
-                    setSuccess(res.data.message);
-                    setLoading(false);
-                } else {
-                    setError(res.data.message);
-                    setLoading(false);
-                }
-            })
-            .catch((err) => {
-                setError(err.message);
-                setLoading(false);
-            });
-    };
+  const login = (e) => {
+    e.preventDefault();
 
-    return (
-        <div>
-            <form onSubmit={loggingin}>
-                <label>Email:</label>
-                <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email...."
-                    required
-                />
-                <br />
-                <label>Password:</label>
-                <input
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    placeholder="Password...."
-                    required
-                />
-                <br />
-                <button type="submit">LOGIN</button>
-            </form>
-            {loading && <p>Loading...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {success && <p style={{ color: "green" }}>{success}</p>}
-            <div className="link-container">
-                <p>Don't have an account? <Link to="/register">Register</Link></p>
-            </div>
-        </div>
-    );
+    const users = JSON.parse(localStorage.getItem('users')) || [];
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      navigate('/home'); 
+    } else {
+      alert('Invalid Username or Password');
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <h2>Login</h2>
+      <form className='space' onSubmit={login}>
+        <input
+          className='form'
+          type="text"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        /><br/>
+        <input
+          className='form'
+          type="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button className='btn2' type="submit">Login</button>
+      </form>
+      <div className="link-container">
+        <p>New User? <Link to="/register">Register here</Link></p>
+      </div>
+    </div>
+  );
 };
 
 export default Login;

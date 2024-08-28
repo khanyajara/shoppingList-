@@ -1,6 +1,10 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/action";
+import AddItem from "./addItem";
+import ShoppingList from "./shoppinglist";
+import CategoryItem from "./categoryitem";
+
 
 const Home = () => {
     const dispatch = useDispatch();
