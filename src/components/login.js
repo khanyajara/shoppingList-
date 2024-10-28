@@ -1,12 +1,11 @@
-import React, { useState, navigate } from "react";
-import { Link } from 'react-router-dom';
-
+import React, { useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import './login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  
+  const navigate = useNavigate(); // Use `useNavigate` hook here
 
   const login = (e) => {
     e.preventDefault();
@@ -16,7 +15,7 @@ const Login = () => {
 
     if (user) {
       localStorage.setItem('loggedInUser', JSON.stringify(user));
-      navigate('/home'); 
+      navigate('/home'); // Use navigate as a function
     } else {
       alert('Invalid Username or Password');
     }

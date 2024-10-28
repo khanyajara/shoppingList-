@@ -8,25 +8,42 @@ const AddItem = () => {
     const [quantity, setQuantity] = useState(1);
     const [category, setCategory] = useState("");
     const [shop, setShop] = useState("");
-    const [shoppingList, setShoppingList] = useState(""); // New state for selected shopping list
-    const [items, setItems] = useState([]); // New state for the list of items
-    const [sharedWith, setSharedWith] = useState(""); // New state for sharing lists
+    const [shoppingList, setShoppingList] = useState(""); // Selected shopping list
+    const [items, setItems] = useState([]); // List of items
+    const [sharedWith, setSharedWith] = useState(""); // User to share with
+    const [sharedLists, setSharedLists] = useState([]); // Shared shopping lists
+    const [expandedList, setExpandedList] = useState(null); // Track expanded list for collapsible functionality
 
     const dispatch = useDispatch();
 
     const submitItem = (e) => {
         e.preventDefault();
         if (item.trim() && quantity > 0 && category && shoppingList) { // Check if all fields are filled
-            const newItem = { id: Date.now(), name: item, shop: shop, quantity: quantity, category: category, shoppingList: shoppingList, sharedWith: sharedWith || null };
+            const newItem = { id: Date.now(), name: item, shop, quantity, category, shoppingList };
             dispatch(addItem(newItem)); 
             setItems((prevItems) => [...prevItems, newItem]); // Update the list of items
             setItem('');
             setShop("");
             setQuantity(1);
             setCategory("");
-            setShoppingList(""); // Reset the selected shopping list
-            setSharedWith(""); // Reset shared with input
+            setShoppingList(""); // Reset selected shopping list
         }
+    };
+
+    // Function to share the shopping list with others
+    const shareShoppingList = () => {
+        if (shoppingList && sharedWith) {
+            setSharedLists((prevSharedLists) => [
+                ...prevSharedLists,
+                { listName: shoppingList, sharedWith }
+            ]);
+            setSharedWith(""); // Reset the input after sharing
+        }
+    };
+
+    // Function to toggle list expansion
+    const toggleList = (listName) => {
+        setExpandedList(expandedList === listName ? null : listName);
     };
 
     // Example shopping lists (this could be dynamic in a real application)
@@ -102,28 +119,43 @@ const AddItem = () => {
                     placeholder="Share with (email or username)"
                     className="add-item__input"
                 />
+                <button type="button" onClick={shareShoppingList} className="add-item__btn">Share List</button>
                 <br />
                 
-                <button type="submit" className="add-item__btn">Add</button>
+                <button type="submit" className="add-item__btn">Add Item</button>
             </form>
             
             <div className="item-list">
-                <h3>Added Items</h3>
+                <h3>Shopping Lists</h3>
                 {shoppingLists.map((list) => (
-                    <div key={list}>
-                        <h4>{list}</h4>
-                        <ul>
-                            {items
-                                .filter(item => item.shoppingList === list) 
-                                .map(item => (
-                                    <li key={item.id}>
-                                        {item.name} - {item.quantity} - {item.category} (from {item.shop})
-                                        {item.sharedWith && <span> (Shared with: {item.sharedWith})</span>}
-                                    </li>
-                                ))}
-                        </ul>
+                    <div key={list} className="shopping-list">
+                        <h4 onClick={() => toggleList(list)} style={{ cursor: 'pointer' }}>
+                            {list} {expandedList === list ? "▼" : "▶"}
+                        </h4>
+                        {expandedList === list && (
+                            <ul className="item-subfolder">
+                                {items
+                                    .filter(item => item.shoppingList === list) // Filter items by shopping list
+                                    .map(item => (
+                                        <li key={item.id}>
+                                            {item.name} - {item.quantity} - {item.category} (from {item.shop})
+                                        </li>
+                                    ))}
+                            </ul>
+                        )}
                     </div>
                 ))}
+            </div>
+
+            <div className="shared-lists">
+                <h3>Shared Shopping Lists</h3>
+                <ul>
+                    {sharedLists.map((sharedList, index) => (
+                        <li key={index}>
+                            {sharedList.listName} - Shared with: {sharedList.sharedWith}
+                        </li>
+                    ))}
+                </ul>
             </div>
         </div>
     );
