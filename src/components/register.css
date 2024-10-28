@@ -1,0 +1,72 @@
+/* register.css */
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f9;
+  }
+  
+  .auth-container {
+    width: 400px;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    text-align: center;
+  }
+  
+  h2 {
+    font-size: 24px;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .form {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+  
+  .form:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+  }
+  
+  .btn2 {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .btn2:hover {
+    background-color: #0056b3;
+  }
+  
+  .link-container {
+    margin-top: 1rem;
+    font-size: 14px;
+  }
+  
+  .link-container a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .link-container a:hover {
+    text-decoration: underline;
+  }
+  

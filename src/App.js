@@ -35,12 +35,12 @@ const App = () => {
   return (
     <Router>
       
-      <CategoryItem/>
+     
            
           <Routes>
-              <Route path="/" element={<Home />} />
+              <Route path="/home" element={<Home />} />
               <Route path="/register" element={<Registeruser />} />
-              <Route path="/login" element={<Login />} />
+              <Route path="/" element={<Login />} />
           </Routes>
       
     </Router>

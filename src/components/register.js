@@ -1,7 +1,7 @@
 import React, { useState, navigate } from "react";
 import { Link,  } from 'react-router-dom';
 
-import './login.css';
+import './register.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
@@ -24,7 +24,7 @@ const Login = () => {
 
   return (
     <div className="auth-container">
-      <h2>Login</h2>
+      <h2>Sign-Up</h2>
       <form className='space' onSubmit={login}>
         <input
           className='form'
@@ -42,10 +42,10 @@ const Login = () => {
           onChange={(e) => setPassword(e.target.value)}
           required
         />
-        <button className='btn2' type="submit">Login</button>
+        <button className='btn2' type="submit">Sign-Up</button>
       </form>
       <div className="link-container">
-        <p>New User? <Link to="/register">Register here</Link></p>
+        <p>New User? <Link to="/">Register here</Link></p>
       </div>
     </div>
   );

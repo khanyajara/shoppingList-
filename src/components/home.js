@@ -56,6 +56,8 @@ const Home = () => {
                 <h1 className="todo-title">Shopping List</h1>
                 <button onClick={handleLogout} >Logout</button>
                 <AddItem />
+
+                <CategoryItem/>
             
                
             </div> <div className="lists"><ShoppingList /></div>
